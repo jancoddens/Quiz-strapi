@@ -47,6 +47,20 @@
       "relation": "manyToMany",
       "target": "api::question.question",
       "mappedBy": "themes"
+    },
+    "image": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

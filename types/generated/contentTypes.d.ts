@@ -896,6 +896,12 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    image: Schema.Attribute.Media<'images' | 'videos' | 'audios'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     lists: Schema.Attribute.Relation<'manyToMany', 'api::list.list'>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
@@ -1262,6 +1268,12 @@ export interface ApiThemeTheme extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    image: Schema.Attribute.Media<'images' | 'videos' | 'audios'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
