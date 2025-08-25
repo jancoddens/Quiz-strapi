@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_contents",
+  "info": {
+    "singularName": "user-content",
+    "pluralName": "user-contents",
+    "displayName": "User Content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "contentStatus": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "draft",
+      "enum": [
+        "draft",
+        "review",
+        "published"
+      ]
+    },
+    "data": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_contents"
+    }
+  }
+}

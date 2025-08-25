@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_game_players",
+  "info": {
+    "displayName": "Player"
+  },
+  "options": {},
+  "attributes": {
+    "nickname": {
+      "type": "string",
+      "required": true
+    },
+    "userId": {
+      "type": "string"
+    },
+    "score": {
+      "type": "integer"
+    },
+    "joinedAt": {
+      "type": "datetime"
+    }
+  },
+  "config": {}
+}
