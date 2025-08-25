@@ -917,6 +917,12 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
         };
       }>;
     quizzes: Schema.Attribute.Relation<'manyToMany', 'api::quiz.quiz'>;
+    seo: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     slug: Schema.Attribute.UID<'question'> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -938,6 +944,12 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    year: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
