@@ -94,12 +94,6 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "questions"
     },
-    "quizzes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::quiz.quiz",
-      "mappedBy": "questions"
-    },
     "lists": {
       "type": "relation",
       "relation": "manyToMany",
@@ -137,6 +131,12 @@
       },
       "component": "shared.seo",
       "repeatable": false
+    },
+    "rounds": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::round.round",
+      "inversedBy": "questions"
     }
   }
 }

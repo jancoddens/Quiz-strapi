@@ -655,6 +655,7 @@ export interface ApiGameSessionGameSession extends Struct.CollectionTypeSchema {
       }>;
     publishedAt: Schema.Attribute.DateTime;
     quiz: Schema.Attribute.Relation<'manyToOne', 'api::quiz.quiz'>;
+    round: Schema.Attribute.Relation<'manyToOne', 'api::round.round'>;
     settings: Schema.Attribute.JSON &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -916,7 +917,7 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    quizzes: Schema.Attribute.Relation<'manyToMany', 'api::quiz.quiz'>;
+    rounds: Schema.Attribute.Relation<'manyToMany', 'api::round.round'>;
     seo: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1056,6 +1057,15 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    download: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     estimatedTime: Schema.Attribute.Integer &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1090,16 +1100,7 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
       'plugin::users-permissions.user'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    questions: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::question.question'
-    >;
-    rounds: Schema.Attribute.Component<'quiz.round', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    rounds: Schema.Attribute.Relation<'manyToMany', 'api::round.round'>;
     seo: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1144,6 +1145,115 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
         };
       }> &
       Schema.Attribute.DefaultTo<'public'>;
+  };
+}
+
+export interface ApiRoundRound extends Struct.CollectionTypeSchema {
+  collectionName: 'rounds';
+  info: {
+    displayName: 'Round';
+    pluralName: 'rounds';
+    singularName: 'round';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    download: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    estimatedTime: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    game_sessions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::game-session.game-session'
+    >;
+    isPublic: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::round.round'>;
+    owner: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    questions: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::question.question'
+    >;
+    quizzes: Schema.Attribute.Relation<'manyToMany', 'api::quiz.quiz'>;
+    seo: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Schema.Attribute.UID<'title'> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    timePerQuestion: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    totalTimeLimit: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    visibility: Schema.Attribute.Enumeration<
+      ['public', 'unlisted', 'private']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -1879,6 +1989,7 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    rounds: Schema.Attribute.Relation<'oneToMany', 'api::round.round'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1916,6 +2027,7 @@ declare module '@strapi/strapi' {
       'api::question.question': ApiQuestionQuestion;
       'api::quiz-result.quiz-result': ApiQuizResultQuizResult;
       'api::quiz.quiz': ApiQuizQuiz;
+      'api::round.round': ApiRoundRound;
       'api::site-setting.site-setting': ApiSiteSettingSiteSetting;
       'api::tag.tag': ApiTagTag;
       'api::theme.theme': ApiThemeTheme;

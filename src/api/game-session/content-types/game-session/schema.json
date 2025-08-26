@@ -93,6 +93,12 @@
           "localized": true
         }
       }
+    },
+    "round": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::round.round",
+      "inversedBy": "game_sessions"
     }
   }
 }

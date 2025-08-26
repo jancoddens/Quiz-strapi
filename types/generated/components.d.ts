@@ -24,17 +24,6 @@ export interface QuizAnswer extends Struct.ComponentSchema {
   };
 }
 
-export interface QuizRound extends Struct.ComponentSchema {
-  collectionName: 'components_quiz_rounds';
-  info: {
-    displayName: 'Round';
-  };
-  attributes: {
-    order: Schema.Attribute.Integer;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
 export interface SharedSeo extends Struct.ComponentSchema {
   collectionName: 'components_shared_seos';
   info: {
@@ -54,7 +43,6 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'game.player': GamePlayer;
       'quiz.answer': QuizAnswer;
-      'quiz.round': QuizRound;
       'shared.seo': SharedSeo;
     }
   }

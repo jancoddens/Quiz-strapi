@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "quizzes",
+  "collectionName": "rounds",
   "info": {
-    "singularName": "quiz",
-    "pluralName": "quizzes",
-    "displayName": "Quiz"
+    "singularName": "round",
+    "pluralName": "rounds",
+    "displayName": "Round"
   },
   "options": {
     "draftAndPublish": true
@@ -51,22 +51,6 @@
       },
       "default": true
     },
-    "mode": {
-      "type": "enumeration",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "required": true,
-      "default": "short",
-      "enum": [
-        "short",
-        "live",
-        "practice",
-        "example"
-      ]
-    },
     "estimatedTime": {
       "type": "integer",
       "pluginOptions": {
@@ -82,7 +66,6 @@
           "localized": true
         }
       },
-      "default": "public",
       "enum": [
         "public",
         "unlisted",
@@ -91,20 +74,9 @@
     },
     "owner": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
-    },
-    "coverImage": {
-      "type": "media",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "rounds"
     },
     "seo": {
       "type": "component",
@@ -120,7 +92,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::game-session.game-session",
-      "mappedBy": "quiz"
+      "mappedBy": "round"
     },
     "timePerQuestion": {
       "type": "integer",
@@ -153,11 +125,17 @@
         "audios"
       ]
     },
-    "rounds": {
+    "questions": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::round.round",
-      "inversedBy": "quizzes"
+      "target": "api::question.question",
+      "mappedBy": "rounds"
+    },
+    "quizzes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::quiz.quiz",
+      "mappedBy": "rounds"
     }
   }
 }

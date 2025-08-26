@@ -107,6 +107,12 @@
       "relation": "oneToMany",
       "target": "api::blog-post.blog-post",
       "mappedBy": "author"
+    },
+    "rounds": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::round.round",
+      "mappedBy": "owner"
     }
   }
 }
