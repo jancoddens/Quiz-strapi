@@ -909,7 +909,7 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
       'api::question.question'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    question: Schema.Attribute.String &
+    question: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
