@@ -114,6 +114,14 @@
         "audios"
       ]
     },
+    "license_image": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "year": {
       "type": "integer",
       "pluginOptions": {
