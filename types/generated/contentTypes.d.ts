@@ -1432,6 +1432,12 @@ export interface ApiThemeTheme extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::question.question'
     >;
+    seo: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     slug: Schema.Attribute.UID<'name'> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
