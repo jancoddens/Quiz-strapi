@@ -1360,6 +1360,12 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    featured: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'>;
     name: Schema.Attribute.String &
@@ -1374,6 +1380,12 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::question.question'
     >;
+    seo: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     slug: Schema.Attribute.UID<'name'> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
