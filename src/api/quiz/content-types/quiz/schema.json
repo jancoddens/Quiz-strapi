@@ -158,6 +158,14 @@
       "relation": "manyToMany",
       "target": "api::round.round",
       "inversedBy": "quizzes"
+    },
+    "date": {
+      "type": "date",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
