@@ -803,6 +803,52 @@ export interface ApiListList extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiLogoLogo extends Struct.CollectionTypeSchema {
+  collectionName: 'logos';
+  info: {
+    displayName: 'Logo';
+    pluralName: 'logos';
+    singularName: 'logo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    answer: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    answers: Schema.Attribute.Component<'quiz.answer', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::logo.logo'>;
+    publishedAt: Schema.Attribute.DateTime;
+    question: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPlayerStatPlayerStat extends Struct.CollectionTypeSchema {
   collectionName: 'player_stats';
   info: {
@@ -2076,6 +2122,7 @@ declare module '@strapi/strapi' {
       'api::game-session.game-session': ApiGameSessionGameSession;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::list.list': ApiListList;
+      'api::logo.logo': ApiLogoLogo;
       'api::player-stat.player-stat': ApiPlayerStatPlayerStat;
       'api::question.question': ApiQuestionQuestion;
       'api::quiz-result.quiz-result': ApiQuizResultQuizResult;
