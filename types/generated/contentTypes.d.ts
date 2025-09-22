@@ -1091,6 +1091,12 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    featured: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     game_sessions: Schema.Attribute.Relation<
       'oneToMany',
       'api::game-session.game-session'
