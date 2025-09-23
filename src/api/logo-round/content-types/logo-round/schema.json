@@ -100,6 +100,21 @@
       "relation": "oneToMany",
       "target": "api::game-session.game-session",
       "mappedBy": "logo_round"
+    },
+    "coverImage": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
