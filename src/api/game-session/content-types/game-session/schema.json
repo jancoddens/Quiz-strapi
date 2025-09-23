@@ -99,6 +99,12 @@
       "relation": "manyToOne",
       "target": "api::round.round",
       "inversedBy": "game_sessions"
+    },
+    "logo_round": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::logo-round.logo-round",
+      "inversedBy": "game_sessions"
     }
   }
 }

@@ -653,6 +653,10 @@ export interface ApiGameSessionGameSession extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::game-session.game-session'
     >;
+    logo_round: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::logo-round.logo-round'
+    >;
     players: Schema.Attribute.Component<'game.player', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -803,6 +807,94 @@ export interface ApiListList extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiLogoRoundLogoRound extends Struct.CollectionTypeSchema {
+  collectionName: 'logo_rounds';
+  info: {
+    displayName: 'Logo round';
+    pluralName: 'logo-rounds';
+    singularName: 'logo-round';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    estimatedTime: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    game_sessions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::game-session.game-session'
+    >;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::logo-round.logo-round'
+    >;
+    logos: Schema.Attribute.Relation<'manyToMany', 'api::logo.logo'>;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Schema.Attribute.UID<'title'> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    timePerQuestion: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    totalTimeLimit: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    visibility: Schema.Attribute.Enumeration<
+      ['public', 'unlisted', 'private']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'public'>;
+  };
+}
+
 export interface ApiLogoLogo extends Struct.CollectionTypeSchema {
   collectionName: 'logos';
   info: {
@@ -836,6 +928,10 @@ export interface ApiLogoLogo extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::logo.logo'>;
+    logo_rounds: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::logo-round.logo-round'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     question: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.SetPluginOptions<{
@@ -2122,6 +2218,7 @@ declare module '@strapi/strapi' {
       'api::game-session.game-session': ApiGameSessionGameSession;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::list.list': ApiListList;
+      'api::logo-round.logo-round': ApiLogoRoundLogoRound;
       'api::logo.logo': ApiLogoLogo;
       'api::player-stat.player-stat': ApiPlayerStatPlayerStat;
       'api::question.question': ApiQuestionQuestion;

@@ -54,6 +54,12 @@
         "videos",
         "audios"
       ]
+    },
+    "logo_rounds": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::logo-round.logo-round",
+      "mappedBy": "logos"
     }
   }
 }
