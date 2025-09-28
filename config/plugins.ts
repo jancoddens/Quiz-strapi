@@ -12,8 +12,9 @@ export default ({ env }) => ({
         },
       },
       settings: {
-        defaultFrom: env("EMAIL_FROM", "noreply@jouwdomein.be"),
-        defaultReplyTo: env("EMAIL_REPLY_TO", "support@jouwdomein.be"),
+        defaultFrom: env("EMAIL_FROM", "info@quizvragen.eu"),
+        defaultReplyTo: env("EMAIL_REPLY_TO", "support@jquizvragen.eu"),
+        testAddress: env("EMAIL_REPLY_TO", "info@jquizvragen.eu"),
       },
     },
   },
