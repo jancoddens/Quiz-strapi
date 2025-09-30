@@ -1281,6 +1281,8 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
       'plugin::users-permissions.user'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    quizzes: Schema.Attribute.Relation<'manyToMany', 'api::quiz.quiz'>;
+    related_quizzes: Schema.Attribute.Relation<'manyToMany', 'api::quiz.quiz'>;
     rounds: Schema.Attribute.Relation<'manyToMany', 'api::round.round'>;
     seo: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
