@@ -1232,6 +1232,15 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    difficulty: Schema.Attribute.Enumeration<
+      ['A', 'AB', 'B', 'BC', 'C', 'CD', 'D']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'CD'>;
     download: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true

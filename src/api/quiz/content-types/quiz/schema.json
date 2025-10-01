@@ -186,6 +186,24 @@
       "relation": "manyToMany",
       "target": "api::quiz.quiz",
       "mappedBy": "quizzes"
+    },
+    "difficulty": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "CD",
+      "enum": [
+        "A",
+        "AB",
+        "B",
+        "BC",
+        "C",
+        "CD",
+        "D"
+      ]
     }
   }
 }
