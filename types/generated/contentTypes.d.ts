@@ -2172,7 +2172,8 @@ export interface PluginUsersPermissionsUser
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     country: Schema.Attribute.Enumeration<
       [
-        'Belgi\u00EB',
+        'Vlaanderen',
+        'Walloni\u00EB',
         'Nederland',
         'Duitsland',
         'Luxemburg',

@@ -78,7 +78,8 @@
     "country": {
       "type": "enumeration",
       "enum": [
-        "België",
+        "Vlaanderen",
+        "Wallonië",
         "Nederland",
         "Duitsland",
         "Luxemburg",
