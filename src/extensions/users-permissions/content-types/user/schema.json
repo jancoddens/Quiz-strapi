@@ -66,6 +66,15 @@
       "inversedBy": "users",
       "configurable": false
     },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "optin": {
+      "type": "integer"
+    },
     "questions": {
       "type": "relation",
       "relation": "oneToMany",
@@ -113,12 +122,6 @@
       "relation": "oneToMany",
       "target": "api::round.round",
       "mappedBy": "owner"
-    },
-    "firstname": {
-      "type": "string"
-    },
-    "lastname": {
-      "type": "string"
     }
   }
 }
