@@ -2177,10 +2177,12 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    firstname: Schema.Attribute.String;
     game_sessions: Schema.Attribute.Relation<
       'oneToMany',
       'api::game-session.game-session'
     >;
+    lastname: Schema.Attribute.String;
     lists: Schema.Attribute.Relation<'oneToMany', 'api::list.list'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

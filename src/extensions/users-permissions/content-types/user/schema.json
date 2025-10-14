@@ -113,6 +113,12 @@
       "relation": "oneToMany",
       "target": "api::round.round",
       "mappedBy": "owner"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
     }
   }
 }
