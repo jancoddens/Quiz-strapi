@@ -72,6 +72,31 @@
     "lastname": {
       "type": "string"
     },
+    "city": {
+      "type": "string"
+    },
+    "country": {
+      "type": "enumeration",
+      "enum": [
+        "België",
+        "Nederland",
+        "Duitsland",
+        "Luxemburg",
+        "Frankrijk",
+        "Engeland"
+      ]
+    },
+    "Gender": {
+      "type": "enumeration",
+      "enum": [
+        "Male",
+        "Female",
+        "X"
+      ]
+    },
+    "team": {
+      "type": "string"
+    },
     "optin": {
       "type": "integer"
     },

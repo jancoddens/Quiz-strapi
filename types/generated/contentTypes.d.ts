@@ -2167,8 +2167,19 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::blog-post.blog-post'
     >;
+    city: Schema.Attribute.String;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    country: Schema.Attribute.Enumeration<
+      [
+        'Belgi\u00EB',
+        'Nederland',
+        'Duitsland',
+        'Luxemburg',
+        'Frankrijk',
+        'Engeland',
+      ]
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -2182,6 +2193,7 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::game-session.game-session'
     >;
+    Gender: Schema.Attribute.Enumeration<['Male', 'Female', 'X']>;
     lastname: Schema.Attribute.String;
     lists: Schema.Attribute.Relation<'oneToMany', 'api::list.list'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -2213,6 +2225,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     rounds: Schema.Attribute.Relation<'oneToMany', 'api::round.round'>;
+    team: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
