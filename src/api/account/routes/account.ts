@@ -6,7 +6,7 @@ export default {
       path: '/account/me',
       handler: 'account.me',
       config: {
-        auth: { strategies: ['jwt'] },
+        policies: ['plugin::users-permissions.isAuthenticated'], // ⬅️ belangrijk
       },
     },
     {
@@ -14,7 +14,7 @@ export default {
       path: '/account/me',
       handler: 'account.updateMe',
       config: {
-        auth: { strategies: ['jwt'] },
+        policies: ['plugin::users-permissions.isAuthenticated'], // ⬅️ belangrijk
       },
     },
   ],

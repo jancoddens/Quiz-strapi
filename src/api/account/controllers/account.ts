@@ -1,21 +1,16 @@
-// src/api/account/controllers/account.ts
 import { errors } from '@strapi/utils';
-const { ApplicationError } = errors;
+const { UnauthorizedError } = errors; // liever deze dan ApplicationError
 
 const ALLOWED_FIELDS = ['email', 'username', 'firstname', 'lastname', 'city', 'country', 'team'];
 
 export default {
   async me(ctx) {
     const user = ctx.state.user;
-    if (!user) throw new ApplicationError('Unauthorized');
+    if (!user) throw new UnauthorizedError('Unauthorized');
 
-    // haal verse data uit DB
-    const fresh = await strapi.entityService.findOne('plugin::users-permissions.user', user.id, {
-      populate: [],
-    });
+    const fresh = await strapi.entityService.findOne('plugin::users-permissions.user', user.id, { populate: [] });
 
-    // laat niet alles lekken; stuur enkel relevante velden terug
-    const out: Record<string, any> = {
+    ctx.body = {
       id: fresh.id,
       email: fresh.email,
       username: fresh.username,
@@ -27,35 +22,28 @@ export default {
       country: fresh.country ?? null,
       team: fresh.team ?? null,
     };
-
-    ctx.body = out;
   },
 
   async updateMe(ctx) {
     const user = ctx.state.user;
-    if (!user) throw new ApplicationError('Unauthorized');
+    if (!user) throw new UnauthorizedError('Unauthorized');
 
     const data = ctx.request.body ?? {};
     const patch: Record<string, any> = {};
 
     for (const k of ALLOWED_FIELDS) {
       if (k in data) {
-        // lege string => null
-        const v = data[k];
+        const v = (data as any)[k];
         patch[k] = v === '' ? null : v;
       }
     }
 
-    // username altijd gelijk aan email (als email gezet wordt)
     if (typeof patch.email === 'string' && patch.email.trim()) {
       patch.username = patch.email.trim();
       patch.email = patch.email.trim();
     }
 
-    // werk bij
-    const updated = await strapi.entityService.update('plugin::users-permissions.user', user.id, {
-      data: patch,
-    });
+    const updated = await strapi.entityService.update('plugin::users-permissions.user', user.id, { data: patch });
 
     ctx.body = {
       id: updated.id,
