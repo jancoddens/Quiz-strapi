@@ -4,7 +4,7 @@ const { ApplicationError } = errors;
 
 const ALLOWED_FIELDS = [
   'email', 'username', 'firstname', 'lastname', 'city', 'country', 'team',
-  'optin', 'Gender', // let op: veldnaam 'Gender' exact zoals in je user model
+  'optin', 'Gender', // let op: veldnaam exact zoals in het user model
 ];
 
 export default {
@@ -28,7 +28,7 @@ export default {
       country:   fresh.country   ?? null,
       team:      fresh.team      ?? null,
       optin:     typeof fresh.optin === 'number' ? fresh.optin : null, // 1 of 2
-      Gender:    fresh.Gender ?? null, // 'Female' | 'Male' | 'x' | null
+      Gender:    fresh.Gender ?? null, // 'Female' | 'Male' | 'X' | null
     };
   },
 
@@ -39,6 +39,7 @@ export default {
     const data = ctx.request.body ?? {};
     const patch: Record<string, any> = {};
 
+    // Alleen toegestane velden toelaten; lege string => null
     for (const k of ALLOWED_FIELDS) {
       if (Object.prototype.hasOwnProperty.call(data, k)) {
         const v = (data as any)[k];
@@ -48,8 +49,9 @@ export default {
 
     // username sync met email
     if (typeof patch.email === 'string' && patch.email.trim()) {
-      patch.username = patch.email.trim();
-      patch.email = patch.email.trim();
+      const mail = patch.email.trim();
+      patch.email = mail;
+      patch.username = mail;
     }
 
     // optin normaliseren (2 = aan, 1 = uit)
@@ -58,14 +60,18 @@ export default {
       patch.optin = n === 2 ? 2 : 1;
     }
 
-    // Gender normaliseren (case-insensitive) Female | Male | x | null
+    // Gender normaliseren -> 'Female' | 'Male' | 'X' | null
     if ('Gender' in patch) {
       const raw = typeof patch.Gender === 'string' ? patch.Gender.trim() : null;
-      const norm = raw ? raw.toLowerCase() : null;
-      if (norm === 'female') patch.Gender = 'Female';
-      else if (norm === 'male') patch.Gender = 'Male';
-      else if (norm === 'X') patch.Gender = 'X';
-      else patch.Gender = null;
+      if (!raw) {
+        patch.Gender = null;
+      } else {
+        const v = raw.toLowerCase();
+        if (v === 'female' || v === 'f') patch.Gender = 'Female';
+        else if (v === 'male' || v === 'm') patch.Gender = 'Male';
+        else if (v === 'x') patch.Gender = 'X';  // ✅ hier corrigeren we de case
+        else patch.Gender = null; // onbekende waarde → null
+      }
     }
 
     const updated = await strapi.entityService.update('plugin::users-permissions.user', user.id, {
@@ -84,7 +90,7 @@ export default {
       country:   updated.country   ?? null,
       team:      updated.team      ?? null,
       optin:     typeof updated.optin === 'number' ? updated.optin : null,
-      Gender:    updated.Gender ?? null,
+      Gender:    updated.Gender ?? null, // zal nu 'X' zijn als je 'x' of 'X' doorgaf
     };
   },
 };
