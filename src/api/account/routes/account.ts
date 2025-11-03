@@ -6,7 +6,7 @@ export default {
       path: '/account/me',
       handler: 'account.me',
       config: {
-        auth: { strategies: ['jwt'] }, // vereis ingelogde user
+        auth: { strategies: ['users-permissions'] }, // ✅ v5 style
       },
     },
     {
@@ -14,7 +14,7 @@ export default {
       path: '/account/me',
       handler: 'account.updateMe',
       config: {
-        auth: { strategies: ['jwt'] }, // vereis ingelogde user
+        auth: { strategies: ['users-permissions'] }, // ✅ v5 style
       },
     },
   ],
