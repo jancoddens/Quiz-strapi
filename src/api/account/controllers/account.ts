@@ -64,7 +64,7 @@ export default {
       const norm = raw ? raw.toLowerCase() : null;
       if (norm === 'female') patch.Gender = 'Female';
       else if (norm === 'male') patch.Gender = 'Male';
-      else if (norm === 'x') patch.Gender = 'x';
+      else if (norm === 'X') patch.Gender = 'X';
       else patch.Gender = null;
     }
 
