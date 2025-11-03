@@ -6,7 +6,7 @@ export default {
       path: '/account/me',
       handler: 'account.me',
       config: {
-        policies: ['plugin::users-permissions.isAuthenticated'], // ⬅️ belangrijk
+        policies: ['plugin::users-permissions.isAuthenticated'],
       },
     },
     {
@@ -14,7 +14,7 @@ export default {
       path: '/account/me',
       handler: 'account.updateMe',
       config: {
-        policies: ['plugin::users-permissions.isAuthenticated'], // ⬅️ belangrijk
+        policies: ['plugin::users-permissions.isAuthenticated'],
       },
     },
   ],
