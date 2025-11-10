@@ -151,6 +151,14 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "inversedBy": "questions"
+    },
+    "video": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

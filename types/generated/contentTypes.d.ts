@@ -1183,6 +1183,12 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    video: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     year: Schema.Attribute.Integer &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
