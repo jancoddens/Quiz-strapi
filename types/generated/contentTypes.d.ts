@@ -1028,6 +1028,40 @@ export interface ApiLogoLogo extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNewsletterSignupNewsletterSignup
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'newsletter_signups';
+  info: {
+    displayName: 'newsletter-signups';
+    pluralName: 'newsletter-signups';
+    singularName: 'newsletter-signup';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String & Schema.Attribute.Unique;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::newsletter-signup.newsletter-signup'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    source: Schema.Attribute.String;
+    statusSubscription: Schema.Attribute.Enumeration<
+      ['pending', 'subscribed', 'unsubscribed']
+    > &
+      Schema.Attribute.DefaultTo<'subscribed'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPlayerStatPlayerStat extends Struct.CollectionTypeSchema {
   collectionName: 'player_stats';
   info: {
@@ -2338,6 +2372,7 @@ declare module '@strapi/strapi' {
       'api::list.list': ApiListList;
       'api::logo-round.logo-round': ApiLogoRoundLogoRound;
       'api::logo.logo': ApiLogoLogo;
+      'api::newsletter-signup.newsletter-signup': ApiNewsletterSignupNewsletterSignup;
       'api::player-stat.player-stat': ApiPlayerStatPlayerStat;
       'api::question.question': ApiQuestionQuestion;
       'api::quiz-result.quiz-result': ApiQuizResultQuizResult;
