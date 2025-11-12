@@ -26,6 +26,18 @@
         "subscribed",
         "unsubscribed"
       ]
+    },
+    "confirmTokenHash": {
+      "type": "string"
+    },
+    "confirmTokenExpires": {
+      "type": "datetime"
+    },
+    "confirmedAt": {
+      "type": "datetime"
+    },
+    "optin": {
+      "type": "integer"
     }
   }
 }

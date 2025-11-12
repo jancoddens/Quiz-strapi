@@ -1040,6 +1040,9 @@ export interface ApiNewsletterSignupNewsletterSignup
     draftAndPublish: true;
   };
   attributes: {
+    confirmedAt: Schema.Attribute.DateTime;
+    confirmTokenExpires: Schema.Attribute.DateTime;
+    confirmTokenHash: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1050,6 +1053,7 @@ export interface ApiNewsletterSignupNewsletterSignup
       'api::newsletter-signup.newsletter-signup'
     > &
       Schema.Attribute.Private;
+    optin: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     source: Schema.Attribute.String;
     statusSubscription: Schema.Attribute.Enumeration<
