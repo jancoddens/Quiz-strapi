@@ -1217,8 +1217,8 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
-      'manyToOne',
+    users: Schema.Attribute.Relation<
+      'manyToMany',
       'plugin::users-permissions.user'
     >;
     users_permissions_user: Schema.Attribute.Relation<
@@ -2306,7 +2306,10 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    favorites: Schema.Attribute.Relation<'oneToMany', 'api::question.question'>;
+    favorites: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::question.question'
+    >;
     firstname: Schema.Attribute.String;
     game_sessions: Schema.Attribute.Relation<
       'oneToMany',

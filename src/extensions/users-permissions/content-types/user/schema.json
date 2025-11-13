@@ -151,9 +151,9 @@
     },
     "favorites": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::question.question",
-      "mappedBy": "user"
+      "mappedBy": "users"
     }
   }
 }
