@@ -155,5 +155,12 @@
       "target": "api::question.question",
       "mappedBy": "favorited_by"
     }
+  },
+  "config": {
+    "attributes": {
+      "favorites": {
+        "populate": true
+      }
+    }
   }
 }
