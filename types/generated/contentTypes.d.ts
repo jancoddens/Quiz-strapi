@@ -1166,10 +1166,6 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    favorited_by: Schema.Attribute.Relation<
-      'manyToMany',
-      'plugin::users-permissions.user'
-    >;
     image: Schema.Attribute.Media<'images' | 'videos' | 'audios'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -2306,10 +2302,6 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    favorites: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::question.question'
-    >;
     firstname: Schema.Attribute.String;
     game_sessions: Schema.Attribute.Relation<
       'oneToMany',

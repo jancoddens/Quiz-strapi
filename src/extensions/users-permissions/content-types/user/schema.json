@@ -148,12 +148,6 @@
       "relation": "oneToMany",
       "target": "api::round.round",
       "mappedBy": "owner"
-    },
-    "favorites": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::question.question",
-      "inversedBy": "favorited_by"
     }
   }
 }
