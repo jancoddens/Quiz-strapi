@@ -57,6 +57,12 @@
       },
       "component": "shared.seo",
       "repeatable": false
+    },
+    "favorites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::question.question",
+      "inversedBy": "favorited_bies"
     }
   }
 }
