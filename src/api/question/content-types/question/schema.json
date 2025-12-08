@@ -160,10 +160,10 @@
         }
       }
     },
-    "favorited_bies": {
+    "favorited_by": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::blog-category.blog-category",
+      "target": "plugin::users-permissions.user",
       "mappedBy": "favorites"
     }
   }

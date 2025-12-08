@@ -497,10 +497,6 @@ export interface ApiBlogCategoryBlogCategory
           localized: true;
         };
       }>;
-    favorites: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::question.question'
-    >;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1170,9 +1166,9 @@ export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    favorited_bies: Schema.Attribute.Relation<
+    favorited_by: Schema.Attribute.Relation<
       'manyToMany',
-      'api::blog-category.blog-category'
+      'plugin::users-permissions.user'
     >;
     image: Schema.Attribute.Media<'images' | 'videos' | 'audios'> &
       Schema.Attribute.SetPluginOptions<{
@@ -2310,6 +2306,10 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    favorites: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::question.question'
+    >;
     firstname: Schema.Attribute.String;
     game_sessions: Schema.Attribute.Relation<
       'oneToMany',
